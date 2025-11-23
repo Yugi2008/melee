@@ -2,6 +2,23 @@
 #define MELEE_MN_NAME_NEW_H
 
 #include <placeholder.h>
+#include <mn/mnmain.h>
+#include <lb/lblanguage.h>
+
+typedef struct {
+    u8 unk0;       // offset 0
+    u8 _pad0[2];   // 1,2
+    u8 unk3;       // offset 3
+    u8 _pad1[2];   // 4,5
+    u8 unk6;       // offset 6
+    u8 _pad2[2];   // 7,8
+    u8 unk9;       // offset 9
+} MnNameNewCurrentNameText;
+
+extern MnNameNewCurrentNameText mnNameNew_CurrentNameText;
+extern u8 mnNameNew_NullCharacter;
+extern s8 mnNameNew_PortInUse;
+
 
 /* 23B0F8 */ UNK_RET mnNameNew_8023B0F8(UNK_PARAMS);
 /* 23B224 */ UNK_RET mnNameNew_8023B224(UNK_PARAMS);
@@ -24,8 +41,8 @@
 /* 23DBE8 */ UNK_RET fn_8023DBE8(UNK_PARAMS);
 /* 23E0D8 */ UNK_RET mnNameNew_8023E0D8(UNK_PARAMS);
 /* 23E264 */ UNK_RET InitNameEntryUIState(UNK_PARAMS);
-/* 23E32C */ UNK_RET mnNameNew_8023E32C(UNK_PARAMS);
-/* 23E630 */ UNK_RET mnNameNew_EnterFromMnName(UNK_PARAMS);
+/* 23E32C */ s32 mnNameNew_8023E32C(s32 arg0);
+/* 23E630 */ s32 mnNameNew_EnterFromMnName(s32 arg0);
 /* 23E6D0 */ void mnNameNew_EnterFromMnCharSel(UNK_T, int);
 /* 23EA08 */ void mnNameNew_8023EA08(UNK_T);
 

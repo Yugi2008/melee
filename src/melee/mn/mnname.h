@@ -54,7 +54,7 @@ struct gmm_x2FF8_inner* GetPersistentNameData(s32 arg0);
 /* 2377A8 */ UNK_RET IsNameUnique(UNK_PARAMS);
 /* 237834 */ UNK_RET DeleteName(UNK_PARAMS);
 /* 2379BC */ s32 IsNameValid(u8 arg0);
-/* 237A04 */ UNK_RET CreateNameAtIndex(UNK_PARAMS);
+/* 237A04 */ s32 CreateNameAtIndex(u32 arg0);
 /* 237A68 */ UNK_RET mnName_SortNames(UNK_PARAMS);
 /* 237D94 */ UNK_RET mnName_80237D94(UNK_PARAMS);
 /* 237F78 */ s32 mnName_ConfirmNameDeleteInput();

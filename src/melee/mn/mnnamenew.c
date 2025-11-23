@@ -44,7 +44,30 @@
 
 /// #mnNameNew_8023E32C
 
-/// #mnNameNew_EnterFromMnName
+s32 mnNameNew_EnterFromMnName(s32 arg0){
+    MnNameNewCurrentNameText* text = &mnNameNew_CurrentNameText;
+    u8 unused[8];
+    (void)unused;
+
+    mn_804A04F0.x10 = 1;
+
+    if (lbLang_IsSavedLanguageUS() != 0) {
+        mn_804A04F0.x2 = 0x2D;
+    }
+    else {
+        mn_804A04F0.x2 = 0;
+    }
+
+    mnNameNew_PortInUse = 4;
+
+    text->unk0 = mnNameNew_NullCharacter;
+    text->unk3 = mnNameNew_NullCharacter;
+    text->unk6 = mnNameNew_NullCharacter;
+    text->unk9 = mnNameNew_NullCharacter;
+
+    return mnNameNew_8023E32C(arg0);
+}
+
 
 /// #mnNameNew_EnterFromMnCharSel
 

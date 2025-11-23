@@ -103,8 +103,19 @@ s32 IsNameValid(u8 arg0){
     return 1;
 }
 
+s32 CreateNameAtIndex(u32 arg0){
+    u8 term;
+    u32 idx;
 
-/// #CreateNameAtIndex
+    term = mnName_StringTerminator;
+    idx = arg0 & 0xFF;
+
+    GetPersistentNameData(idx)->namedata[0] = term;
+    GetPersistentNameData(idx)->x1A1 = 1;
+
+    return InitializePersistentNameData(arg0);
+}
+
 
 /// #mnName_SortNames
 

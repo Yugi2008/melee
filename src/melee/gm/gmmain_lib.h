@@ -6,7 +6,6 @@
 
 #include <melee/gm/forward.h>
 #include <melee/gm/types.h>
-
 /* 15CC34 */ GameRules* gmMainLib_8015CC34(void);
 /* 15CC40 */ struct gmm_x1868* gmMainLib_8015CC40(void);
 /* 15CC4C */ void* gmMainLib_8015CC4C(void);
@@ -147,7 +146,7 @@
 /* 15EEB4 */ UNK_RET gmMainLib_8015EEB4(UNK_PARAMS);
 /* 15EEC8 */ UNK_RET gmMainLib_8015EEC8(UNK_PARAMS);
 /* 15EF30 */ void gmMainLib_8015EF30(struct gmMainLib_8015EF30_s* arg0);
-/* 15EF84 */ UNK_RET InitializePersistentNameData(UNK_PARAMS);
+/* 15EF84 */ s32  InitializePersistentNameData(u32 arg0);
 /* 15F150 */ UNK_RET gmMainLib_8015F150(UNK_PARAMS);
 /* 15F260 */ UNK_RET gmMainLib_8015F260(UNK_PARAMS);
 /* 15F464 */ UNK_RET gmMainLib_8015F464(UNK_PARAMS);
