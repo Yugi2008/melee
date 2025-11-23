@@ -4,9 +4,28 @@ void fn_80249A1C(HSD_GObj* arg0);
 
 /// #mnName_8023749C
 
-/// #GetNameText
+/*
+char* GetNameText(int slot){
+    if (IsNameValid(slot) == 0) {
+        return NULL;
+    }
+    return (char*) GetPersistentNameData((u8)slot) + 0x198;
+}
+*/
+int GetNameCount(void){
+    s32 i = 0;        // matches r31
+    s32 count = 0;    // matches r30
 
-/// #GetNameCount
+    do {
+        if (IsNameValid((u8)i) != 0) {
+            count++;
+        }
+        i++;
+    } while (i < 0x78);
+
+    return count;
+}
+
 
 /// #IsNameListFull
 
@@ -17,8 +36,14 @@ void fn_802377A4(void) {}
 /// #IsNameUnique
 
 /// #DeleteName
-
-/// #IsNameValid
+/*
+s32 IsNameValid(u8 arg0){
+    if ((s8) mnName_StringTerminator == (s8) GetPersistentNameData((s32) arg0)->namedata[0]) {
+        return 0;
+    }
+    return 1;
+}
+*/
 
 /// #CreateNameAtIndex
 
@@ -31,8 +56,12 @@ void fn_802377A4(void) {}
 /// #mnName_MainInput
 
 /// #fn_80238540
-
-/// #mnName_802385A0
+/*
+s32 mnName_802385A0(s32 arg0) {
+    mnName_80238754();
+    return mnName_8023A058(arg0);
+}
+*/
 
 /// #mnName_GetPageCount
 
@@ -62,7 +91,28 @@ void fn_802377A4(void) {}
 
 /// #mnName_80239FFC
 
-/// #mnName_8023A058
+
+s32 mnName_8023A058(MnNameData* arg0){
+    HSD_JObj* jobj;
+    Inner*    tmp;
+
+    tmp = arg0->unk30;
+    if (tmp == NULL) {
+        jobj = NULL;
+    }
+    else {
+        jobj = tmp->unk10;
+    }
+    HSD_JObjRemoveAll(jobj);
+
+    if (arg0->unk3C != NULL) {
+        HSD_SisLib_803A5CC4(arg0->unk3C);
+        arg0->unk3C = NULL;
+    }
+
+    return mnName_80239A24(arg0);
+}
+
 
 /// #fn_8023A0BC
 
