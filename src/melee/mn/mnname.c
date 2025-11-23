@@ -4,14 +4,14 @@ void fn_80249A1C(HSD_GObj* arg0);
 
 /// #mnName_8023749C
 
-/*
+
 char* GetNameText(int slot){
     if (IsNameValid(slot) == 0) {
         return NULL;
     }
     return (char*) GetPersistentNameData((u8)slot) + 0x198;
 }
-*/
+
 int GetNameCount(void){
     s32 i = 0;        // matches r31
     s32 count = 0;    // matches r30
@@ -36,14 +36,14 @@ void fn_802377A4(void) {}
 /// #IsNameUnique
 
 /// #DeleteName
-/*
+
 s32 IsNameValid(u8 arg0){
     if ((s8) mnName_StringTerminator == (s8) GetPersistentNameData((s32) arg0)->namedata[0]) {
         return 0;
     }
     return 1;
 }
-*/
+
 
 /// #CreateNameAtIndex
 
@@ -56,12 +56,12 @@ s32 IsNameValid(u8 arg0){
 /// #mnName_MainInput
 
 /// #fn_80238540
-/*
-s32 mnName_802385A0(s32 arg0) {
+
+s32 mnName_802385A0(MnNameData* arg0) {
     mnName_80238754();
     return mnName_8023A058(arg0);
 }
-*/
+
 
 /// #mnName_GetPageCount
 
@@ -123,5 +123,22 @@ s32 mnName_8023A058(MnNameData* arg0){
 /// #mnName_8023A9B4
 
 /// #mnName_8023AC40
+s32 IsNameNotAllowed(s32 arg0){
+    u8** var_r31 = NotAllowedNamesList;
 
-/// #IsNameNotAllowed
+    loop:
+    {
+        u8* name = *var_r31;
+
+        if ((s8)mnNameNew_NullCharacter != (s8)*name) {
+            if (CompareNameStrings(name, arg0) == 0) {
+                return 1;
+            }
+            var_r31++;
+            goto loop;
+        }
+    }
+
+    return 0;
+}
+

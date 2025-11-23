@@ -2,6 +2,7 @@
 #define GALE01_23749C
 
 #include <platform.h>
+#include <gm/gmmain_lib.h>
 #include <placeholder.h>
 #include <baselib/forward.h>
 
@@ -18,16 +19,24 @@ typedef struct MnNameData {
     HSD_Text* unk3C;      // offset 0x3C
 } MnNameData;
 
+struct gmm_x2FF8_inner;
+struct gmm_x2FF8;
 
+
+extern u8** NotAllowedNamesList;
 extern u8 mnName_StringTerminator;
+extern u8 mnNameNew_NullCharacter;
 extern void HSD_JObjRemoveAll(HSD_JObj* jobj);
 extern void HSD_SisLib_803A5CC4(HSD_Text* text);
+
+
+struct gmm_x2FF8_inner* GetPersistentNameData(s32 arg0);
 
 /* 23749C */ UNK_RET mnName_8023749C(UNK_PARAMS);
 /* 23754C */ char* GetNameText(int slot);
 /* 237594 */ int GetNameCount(void);
 /* 2375EC */ UNK_RET IsNameListFull(UNK_PARAMS);
-/* 237654 */ UNK_RET CompareNameStrings(UNK_PARAMS);
+/* 237654 */ s32 CompareNameStrings(const u8* name, u8 slot);
 /* 2377A4 */ UNK_RET fn_802377A4(UNK_PARAMS);
 /* 2377A8 */ UNK_RET IsNameUnique(UNK_PARAMS);
 /* 237834 */ UNK_RET DeleteName(UNK_PARAMS);
@@ -38,7 +47,7 @@ extern void HSD_SisLib_803A5CC4(HSD_Text* text);
 /* 237F78 */ UNK_RET mnName_ConfirmNameDeleteInput(UNK_PARAMS);
 /* 23817C */ UNK_RET mnName_MainInput(UNK_PARAMS);
 /* 238540 */ UNK_RET fn_80238540(UNK_PARAMS);
-/* 2385A0 */ s32 mnName_802385A0(s32 arg0);
+/* 2385A0 */ s32 mnName_802385A0(MnNameData* arg0);
 /* 2385D4 */ UNK_RET mnName_GetPageCount(UNK_PARAMS);
 /* 238698 */ UNK_RET mnName_GetColumnCount(UNK_PARAMS);
 /* 238754 */ UNK_RET mnName_80238754(UNK_PARAMS);
@@ -59,6 +68,6 @@ extern void HSD_SisLib_803A5CC4(HSD_Text* text);
 /* 23A59C */ UNK_RET mnName_8023A59C(UNK_PARAMS);
 /* 23A9B4 */ UNK_RET mnName_8023A9B4(UNK_PARAMS);
 /* 23AC40 */ UNK_RET mnName_8023AC40(UNK_PARAMS);
-/* 23B084 */ UNK_RET IsNameNotAllowed(UNK_PARAMS);
+/* 23B084 */ s32 IsNameNotAllowed(s32 arg0);
 
 #endif
