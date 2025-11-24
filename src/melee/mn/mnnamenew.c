@@ -40,7 +40,50 @@
 
 /// #mnNameNew_8023E0D8
 
-/// #InitNameEntryUIState
+s32 InitNameEntryUIState(void* arg0, s8 arg1){
+    NameEntryUIState* state;
+    s32 lang;
+    s32 idx;
+    u8** names;
+
+    u8 pad[0x20];
+
+    state = (NameEntryUIState*) arg0;
+    state->unk1 = (u8) mn_804A04F0.x2;
+
+    lang = lbLang_IsSavedLanguageUS();
+    if (lang != 0) {
+        state->unk50 = 2;
+    }
+    else {
+        state->unk50 = 0;
+    }
+
+    idx = 0;
+
+    state->unk58 = (u8) idx;
+    state->unk51 = state->unk1;
+    state->unk54 = idx;
+    state->unk59 = (u8) arg1;
+    state->unk60 = idx;
+    state->unk64 = idx;
+    state->unk68 = idx;
+
+    names = AutoNamesList;
+    while ((s8) mnNameNew_NullCharacter != (s8) **names) {
+        names++;
+        idx++;
+    }
+
+    state->unk5A = (u8) idx;
+    state->unk5B = (u8) idx;
+    state->unk5C = (u8) idx;
+    state->unk5D = (u8) idx;
+    state->unk5E = (u8) idx;
+
+    return lang;
+}
+
 
 /// #mnNameNew_8023E32C
 
