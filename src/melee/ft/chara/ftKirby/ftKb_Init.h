@@ -15,6 +15,10 @@
 
 #include <dolphin/mtx.h>
 
+
+extern f32 ftKb_Init_804D9570;
+extern f32 ftKb_Init_804D9574;
+
 /* 0EE528 */ void ftKb_Init_800EE528(void);
 /* 0EE5C0 */ void ftKb_Init_OnDeath(Fighter_GObj* gobj);
 /* 0EE680 */ void ftKb_Init_OnLoad(Fighter_GObj* gobj);
