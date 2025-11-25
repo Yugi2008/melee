@@ -5053,9 +5053,49 @@ void fn_800F6178(HSD_GObj* gobj)
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 
-/// #fn_800F6210
+void fn_800F6210(Fighter_GObj* gobj){
+    Fighter* fp = gobj->user_data;
 
-/// #fn_800F6280
+    Fighter_ChangeMotionState(
+        gobj,
+        0x164,
+        0x212U,
+        ftKb_Init_804D93B0,
+        ftKb_Init_804D93C0,
+        ftKb_Init_804D93B0,
+        NULL);
+
+    FLAGBYTE(fp, 0x2222).b2 = 1;
+
+    FLAGBYTE(fp, 0x2320).b0 = 0;
+
+    ftCommon_8007E2F4(fp, 0x1FF);
+}
+
+
+void fn_800F6280(Fighter_GObj* gobj){
+    Fighter* fp = gobj->user_data;
+
+    it_802F23EC(fp->target_item_gobj, gobj, -fp->facing_dir);
+
+    Fighter_ChangeMotionState(
+        gobj,
+        0x177,
+        0x212U,
+        ftKb_Init_804D93B0,
+        ftKb_Init_804D93C0,
+        ftKb_Init_804D93B0,
+        NULL);
+
+
+    FLAGBYTE(fp, 0x2222).b2 = 1;
+
+    FLAGBYTE(fp, 0x2320).b0 = 1;
+
+    ftKb_SpecialN_800F9070(gobj);
+    ftCommon_8007E2F4(fp, 0x1FF);
+}
+
 
 /// #fn_800F6318
 
@@ -7895,16 +7935,151 @@ void ftKb_MsSpecialNEnd_Coll(Fighter_GObj* gobj)
         ftKb_SpecialNPe_8010BF90(gobj);
     }
 }
+void ftKb_MsSpecialAirNEnd_Coll(Fighter_GObj* gobj) {
+    if (ft_80081D0C(gobj) != GA_Ground) {
+        ftKb_SpecialNPe_8010C06C(gobj);
+    }
+}
 
-/// #ftKb_MsSpecialAirNEnd_Coll
 
-/// #ftKb_SpecialNPe_8010BF90
+void ftKb_SpecialNPe_8010BF90(Fighter_GObj* gobj){
+    Fighter* temp_r3;
+    s32 var_r0;
+    s32 var_r0_2;
+    s32 var_r30;
+    u8* flag_2219;
+    s32 unused1;
+    s32 unused2;
+    s32 unused3;
+
+    temp_r3 = gobj->user_data;
+
+    if ((u32) temp_r3->cmd_vars[0] == 0) {
+        if ((s32) temp_r3->fv.gw.x2238_panicCharge == 0x12) {
+            var_r0 = 0x1F2;
+        }
+        else {
+            var_r0 = 0x218;
+        }
+        var_r30 = var_r0;
+    }
+    else {
+        if ((s32) temp_r3->fv.gw.x2238_panicCharge == 0x12) {
+            var_r0_2 = 0x1F3;
+        }
+        else {
+            var_r0_2 = 0x219;
+        }
+        var_r30 = var_r0_2;
+    }
+
+    ftCommon_8007D5D4(temp_r3);
+    Fighter_ChangeMotionState(
+        gobj,
+        var_r30,
+        0x0C4C708EU,
+        temp_r3->cur_anim_frame,
+        ftKb_Init_804D9574,
+        ftKb_Init_804D9570,
+        NULL
+    );
+
+    flag_2219 = (u8*) temp_r3 + 0x2219;
+
+    if ((u32)(((*flag_2219 >> 7) & 1)) == 1U) {
+        temp_r3->pre_hitlag_cb  = efLib_PauseAll;
+        temp_r3->post_hitlag_cb = efLib_ResumeAll;
+    }
+}
+
 
 /// #ftKb_SpecialNPe_8010C06C
 
-/// #ftKb_SpecialNPe_8010C148
+void ftKb_SpecialNPe_8010C148(HSD_GObj* gobj) {
+    Fighter* temp_r3;
+    s32 var_r4;
+    s32 unused1;
+    s32 unused2;
+    s32 unused3;
+    s32 unused4;
+    s32 unused5;
+    s32 unused6;
+    s32 unused7;
+    s32 unused8;
 
-/// #ftKb_SpecialNPe_8010C1E8
+
+
+
+
+    temp_r3 = gobj->user_data;
+
+    if (temp_r3->cmd_vars[0] == 0) {
+        var_r4 = (temp_r3->fv.gw.x2238_panicCharge == 0x12) ? 0x1EE : 0x214;
+    }
+    else {
+        var_r4 = (temp_r3->fv.gw.x2238_panicCharge == 0x12) ? 0x1EF : 0x215;
+    }
+
+    Fighter_ChangeMotionState(
+        gobj, var_r4,
+        0x2000U,
+        ftKb_Init_804D9574,
+        ftKb_Init_804D9574,
+        ftKb_Init_804D9570,
+        NULL
+    );
+
+    ((Fighter*)gobj->user_data)->accessory4_cb = fn_8010B1F4;
+}
+
+
+void ftKb_SpecialNPe_8010C1E8(Fighter_GObj* gobj){
+    Fighter* fp = gobj->user_data;
+    Fighter_GObj* fp2 = gobj;
+
+    s32 motion_id;
+    s32 motion_arg;
+    s32 unused1;
+    s32 unused2;
+    s32 unused3;
+    s32 unused4;
+    s32 unused5;
+    s32 unused6;
+    s32 unused7;
+
+    if (fp->cmd_vars[0] == 0) {
+        if ((s32)fp->fv.gw.x2238_panicCharge == 0x12){
+            motion_id = 0x1F2;
+        }
+        else{
+            motion_id = 0x218;
+        }
+        motion_arg = motion_id;
+    } else {
+        if ((s32)fp->fv.gw.x2238_panicCharge == 0x12){
+            motion_id = 0x1F3;
+        }
+
+        else{
+            motion_id = 0x219;
+        }
+        motion_arg = motion_id;
+    }
+
+    Fighter_ChangeMotionState(
+        force_last_eval(fp2),
+            motion_arg,
+            0x2000U,
+            ftKb_Init_804D9574,
+            ftKb_Init_804D9574,
+            ftKb_Init_804D9570,
+            0
+    );
+
+    fp = fp2->user_data;
+    fp->accessory4_cb = fn_8010B1F4;
+}
+
 
 void fn_8010C288(HSD_GObj* gobj)
 {

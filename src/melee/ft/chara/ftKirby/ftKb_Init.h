@@ -20,9 +20,30 @@ typedef struct ftKb_SpecialAirNAttrs {
     /* 0x10 */ f32 x10_friction;
 } ftKb_SpecialAirNAttrs;
 
+typedef struct FighterFlagByte {
+    /* 0x00 */ unsigned char b0 : 1;
+    /* 0x00 */ unsigned char b1 : 1;
+    /* 0x00 */ unsigned char b2 : 1;
+    /* 0x00 */ unsigned char b3 : 1;
+    /* 0x00 */ unsigned char b4 : 1;
+    /* 0x00 */ unsigned char b5 : 1;
+    /* 0x00 */ unsigned char b6 : 1;
+    /* 0x00 */ unsigned char b7 : 1;
+} FighterFlagByte;
 
+#define FLAGBYTE(fp, offset) (*(volatile FighterFlagByte *)((u8 *)(fp) + (offset)))
+
+static inline Fighter_GObj* force_last_eval(Fighter_GObj* p) {
+    return p;
+}
+
+
+extern f32 ftKb_Init_804D93B0;
+extern f32 ftKb_Init_804D93C0;
 extern f32 ftKb_Init_804D9570;
 extern f32 ftKb_Init_804D9574;
+
+void fn_8010B1F4(HSD_GObj* gobj);
 
 /* 0EE528 */ void ftKb_Init_800EE528(void);
 /* 0EE5C0 */ void ftKb_Init_OnDeath(Fighter_GObj* gobj);
