@@ -15,6 +15,11 @@
 
 #include <dolphin/mtx.h>
 
+typedef struct ftKb_SpecialAirNAttrs {
+    /* 0x00 */ u8  x0_pad[0x10];
+    /* 0x10 */ f32 x10_friction;
+} ftKb_SpecialAirNAttrs;
+
 
 extern f32 ftKb_Init_804D9570;
 extern f32 ftKb_Init_804D9574;
