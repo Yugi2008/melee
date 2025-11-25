@@ -5,7 +5,6 @@
 #include <platform.h>
 
 #include "ft/types.h"
-
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "ftCommon/ftCo_AttackDash.h"
