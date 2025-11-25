@@ -94,23 +94,23 @@ void grCorneria_801DD674(Ground_GObj* ground_gobj)
     gr->gv.corneria.x110 = 0;
     gr->gv.corneria.x114 = 0.0f;
     gr->gv.corneria.x120 =
-        grMaterial_801C8CFC(0, 0, gr, Ground_801C3FA4(ground_gobj, 2),
-                            fn_801E12D0, fn_801E12D4, 0);
+    grMaterial_801C8CFC(0, 0, gr, Ground_801C3FA4(ground_gobj, 2),
+                        fn_801E12D0, fn_801E12D4, 0);
     grMaterial_801C8DE0(gr->gv.corneria.x120, 4.0f, 0.0f, 0.0f, 16.0f, 0.0f,
                         0.0f, 4.0f);
     grMaterial_801C8E08(gr->gv.corneria.x120);
     gr->gv.corneria.x124 =
-        grMaterial_801C8CFC(0, 2, gr, Ground_801C3FA4(ground_gobj, 3),
-                            fn_801E12D0, fn_801E12D4, 0);
+    grMaterial_801C8CFC(0, 2, gr, Ground_801C3FA4(ground_gobj, 3),
+                        fn_801E12D0, fn_801E12D4, 0);
     grMaterial_801C8E08(gr->gv.corneria.x124);
     grMaterial_801C8DE0(gr->gv.corneria.x124, 4.0f, 0.0f, 0.0f, 16.0f, 0.0f,
                         0.0f, 4.0f);
     HSD_JObjClearFlags(Ground_801C3FA4(ground_gobj, 6), JOBJ_HIDDEN);
     HSD_JObjSetFlags(Ground_801C3FA4(ground_gobj, 5), JOBJ_HIDDEN);
     gr->gv.corneria.xC8 =
-        grZakoGenerator_801CA394(grCn_803E1FE8, 1, fn_801E2454, 0.3f);
+    grZakoGenerator_801CA394(grCn_803E1FE8, 1, fn_801E2454, 0.3f);
     gr->gv.corneria.xCC =
-        grZakoGenerator_801CA394(grCn_803E2000, 2, fn_801E2480, 0.3f);
+    grZakoGenerator_801CA394(grCn_803E2000, 2, fn_801E2480, 0.3f);
     Ground_801C10B8(ground_gobj, fn_801DD65C);
     gr->x11_flags.b012 = 1;
     gr->gv.corneria.x12C = Ground_801C3FA4(ground_gobj, 8);
@@ -408,8 +408,8 @@ bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj)
         if (temp_r3_2 != NULL && temp_r3_2->gv.corneria.x12C == jobj) {
             temp_f31 = 106.0f * Ground_801C0498();
             temp_f31_2 =
-                ((v->y - sp14.y) * ((107.0f * Ground_801C0498()) / temp_f31)) +
-                sp14.x;
+            ((v->y - sp14.y) * ((107.0f * Ground_801C0498()) / temp_f31)) +
+            sp14.x;
             if (v->x > -((107.0f * Ground_801C0498()) - temp_f31_2)) {
                 return false;
             }

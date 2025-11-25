@@ -327,6 +327,12 @@ struct grCorneria_GroundVars {
     Item_GObj* x124;
     HSD_GObj* x128;
     HSD_JObj* x12C;
+    f32 x130;
+    u8  pad_E0[0xE5 - 0xE0];  // keep your existing padding if you already have it
+    u8  unkE5;                // 0xE5 flag
+    u8  pad_E6[0x118 - 0xE6]; // padding up to 0x118
+
+    f32 unk118;               // 0x118
 };
 
 struct grGreatBay_GroundVars {
