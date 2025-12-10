@@ -46,9 +46,9 @@ struct ftKb_FighterVars {
     /* fp+2294   */ u8 x80[0x9C - 0x80];
     /* fp+22C8   */ int x9C;
     /* fp+22CC   */ UNK_T xA0;
-    /* fp+22D0   */ UNK_T xA4;
+    /* fp+22D0   */ Item_GObj* xA4_ssSpecialNItem;
     /* fp+22D4   */ int xA8;
-    /* fp+22D8   */ UNK_T xAC;
+    /* fp+22D8   */ int        xAC_ssSpecialNFlag;
     /* fp+22DC   */ u32 xB0;
     /* fp+22E0   */ int xB4;
     /* fp+22E4   */ u32 xB8;

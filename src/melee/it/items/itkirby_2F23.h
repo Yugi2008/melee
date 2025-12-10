@@ -7,14 +7,14 @@
 
 #include "it/items/types.h"
 
-/* 2F23AC */ UNK_RET it_802F23AC(UNK_PARAMS);
+/* 2F23AC */ float it_802F23AC(HSD_GObj* item_gobj, Vec3* pos, float y, float f2);
 /* 2F23EC */ void it_802F23EC(Item_GObj* gobj, Fighter_GObj* owner_gobj,
                               float facing_dir);
 /* 2F2578 */ bool itKirby_2F23_UnkMotion0_Anim(Item_GObj*);
 /* 2F2580 */ void itKirby_2F23_UnkMotion0_Phys(Item_GObj*);
 /* 2F2584 */ bool itKirby_2F23_UnkMotion0_Coll(Item_GObj*);
 /* 2F258C */ UNK_RET it_802F258C(UNK_PARAMS);
-/* 2F2810 */ UNK_RET it_802F2810(UNK_PARAMS);
+/* 2F2810 */ void it_802F2810(HSD_GObj* item_gobj);
 /* 2F2888 */ bool itKirby_2F23_UnkMotion1_Anim(Item_GObj*);
 /* 2F2890 */ void itKirby_2F23_UnkMotion1_Phys(Item_GObj*);
 /* 2F2894 */ bool itKirby_2F23_UnkMotion1_Coll(Item_GObj*);

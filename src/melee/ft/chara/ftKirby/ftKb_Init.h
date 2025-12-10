@@ -10,6 +10,11 @@
 #include "ftCommon/ftCo_AttackDash.h"
 #include "ftKirby/forward.h"
 #include "it/forward.h"
+#include "it/items/itluigifireball.h"
+#include "it/items/itlinkbow.h"
+#include "it/items/itsamuschargeshot.h"
+#include "it/items/it_27CF.h"
+#include "ft/chara/ftCommon/ftpickupitem.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
@@ -18,6 +23,52 @@ typedef struct ftKb_SpecialAirNAttrs {
     /* 0x00 */ u8  x0_pad[0x10];
     /* 0x10 */ f32 x10_friction;
 } ftKb_SpecialAirNAttrs;
+
+typedef struct {
+    /* 0x00 */ u8  x0_pad[0x80];
+    /* 0x80 */ f32 unk80;
+} ftKb_EatJumpAttrs;
+
+typedef struct ftKb_FuelOverlay {
+    /* 0x0000 */ u8  _pad[0x22B0];
+    /* 0x22B0 */ f32 fuel;   // x22B0
+    /* 0x22B4 */ f32 flame;  // x22B4
+} ftKb_FuelOverlay;
+
+typedef struct ftKb_FxAirNEnd_DatAttrs {
+    /* 0x000 */ u8  _pad0[0x238];
+    /* 0x238 */ f32 x238;
+    /* 0x23C */ u8  _pad1[0x25C - 0x23C];
+    /* 0x25C */ f32 x25C;
+} ftKb_FxAirNEnd_DatAttrs;
+
+typedef struct ftKb_DatAttrs_190 {
+    u8 _pad[0x190];
+    s32 unk190;
+} ftKb_DatAttrs_190;
+
+typedef struct ftKb_KpSpecialAirN_MotionVars {
+    /* 0x0000 */ u8  x0_pad[0x2350];
+    /* 0x2350 */ s32 x2350_fast_anim_frame;
+    /* 0x2354 */ s32 x2354_unused;
+    /* 0x2358 */ s32 x2358_timer;
+} ftKb_KpSpecialAirN_MotionVars;
+
+typedef struct ftKb_KpSpecialAirN_DatAttrs {
+    /* 0x000 */ u8 x0_pad[0x134];
+    /* 0x134 */ s32 x134_period;
+} ftKb_KpSpecialAirN_DatAttrs;
+
+typedef struct FtKb_Flag2219 {
+    u8 b7 : 1;
+    u8 b6 : 1;
+    u8 b5 : 1;
+    u8 b4 : 1;
+    u8 b3 : 1;
+    u8 b2 : 1;
+    u8 b1 : 1;
+    u8 b0 : 1;
+} FtKb_Flag2219;
 
 typedef struct FighterFlagByte {
     /* 0x00 */ unsigned char b0 : 1;
@@ -30,19 +81,97 @@ typedef struct FighterFlagByte {
     /* 0x00 */ unsigned char b7 : 1;
 } FighterFlagByte;
 
+typedef struct ftKb_SpecialNCaptureAttrs {
+    /* 0x00 */ u8  x0_pad[0x38];
+    /* 0x38 */ f32 unk38;
+    /* 0x3C */ f32 unk3C;
+    /* 0x40 */ u8  x40_pad[0x10];
+    /* 0x50 */ f32 unk50;
+} ftKb_SpecialNCaptureAttrs;
+
+typedef union FtKb_Flag2218 {
+    u8 raw;
+    struct {
+        unsigned b7 : 1;
+        unsigned b6 : 1;
+        unsigned b5 : 1;
+        unsigned b4 : 1;
+        unsigned b3 : 1;
+        unsigned b2 : 1;
+        unsigned b1 : 1;
+        unsigned b0 : 1;
+    } bits;
+} FtKb_Flag2218;
+
+typedef struct FtKb_Unk5E8 {
+    u8  _pad[0x10];
+    void* x10;
+} FtKb_Unk5E8;
+
+#define FTKB_PTR_5E8(fp)  (*(volatile FtKb_Unk5E8**)((u8*)(fp) + 0x5E8))
+
+typedef void (*FighterCallback)(HSD_GObj*);
+
+#define FT_CB_21D4(fp) (*(volatile FighterCallback*)((u8*)(fp) + 0x21D4))
+#define FT_CB_21D8(fp) (*(volatile FighterCallback*)((u8*)(fp) + 0x21D8))
+#define FT_CB_21BC(fp) (*(volatile FighterCallback*)((u8*)(fp) + 0x21BC))
+#define FTKB_FLAG_2219(fp) (*(volatile FtKb_Flag2219*)((u8*)(fp) + 0x2219))
+#define FTKB_FLAG_2218(fp) (*(volatile FtKb_Flag2218*)((u8*)(fp) + 0x2218))
 #define FLAGBYTE(fp, offset) (*(volatile FighterFlagByte *)((u8 *)(fp) + (offset)))
+#define FTKB_ZERO (*(volatile f32*)&ftKb_Init_804D93D8)
 
 static inline Fighter_GObj* force_last_eval(Fighter_GObj* p) {
     return p;
 }
 
 
+
 extern f32 ftKb_Init_804D93B0;
 extern f32 ftKb_Init_804D93C0;
 extern f32 ftKb_Init_804D9570;
 extern f32 ftKb_Init_804D9574;
+extern f32 ftKb_Init_804D93C8;
+extern f32 ftKb_Init_804D93CC;
+extern f32 ftKb_Init_804D93D0;
+extern f32 ftKb_Init_804D93D4;
+extern f32 ftKb_Init_804D93D8;
+extern f32 ftKb_Init_804D93E0;
+extern f32 ftKb_Init_804D93DC;
+extern f32 ftKb_Init_804D93E8;
+extern f32 ftKb_Init_804D93EC;
+extern f32 ftKb_Init_804D93F0;
+extern f32 ftKb_Init_804D9404;
+extern f32 ftKb_Init_804D9424;
+extern f32 ftKb_Init_804D9428;
+extern f32 ftKb_Init_804D9450;
+extern f32 ftKb_Init_804D9454;
+extern f32 ftKb_Init_804D9458;
+extern f32 ftKb_Init_804D945C;
+extern f32 ftKb_Init_804D9460;
+extern f32 ftKb_Init_804D9478;
+extern f32 ftKb_Init_804D947C;
+extern f32 ftKb_Init_804D9480;
+extern f32 ftKb_Init_804D9490;
+extern f32 ftKb_Init_804D9494;
+extern f32 ftKb_Init_804D94A0;
+extern f32 ftKb_Init_804D94A8;
+extern f32 ftKb_Init_804D94A4;
+extern f32 ftKb_Init_804D94BC;
+extern f64 ftKb_Init_804D9498;
+extern f32 ftKb_Init_804D94F0;
+extern f32 ftKb_Init_804D94F4;
 
+Fighter_GObj* it_802AA7E4(Item_GObj* gobj);
+bool it_802AA7F0(Item_GObj* gobj);
+void fn_800F98F4(HSD_GObj* gobj);
 void fn_8010B1F4(HSD_GObj* gobj);
+void fn_800F9260(HSD_GObj* gobj);
+void fn_80100E0C(HSD_GObj* gobj);
+void fn_80105978(HSD_GObj* gobj);
+void fn_80105A34(HSD_GObj* gobj);
+
+extern void efLib_PauseAll(HSD_GObj* gobj);
+extern void efLib_ResumeAll(HSD_GObj* gobj);
 
 /* 0EE528 */ void ftKb_Init_800EE528(void);
 /* 0EE5C0 */ void ftKb_Init_OnDeath(Fighter_GObj* gobj);
@@ -435,8 +564,8 @@ void fn_8010B1F4(HSD_GObj* gobj);
 /* 0FA4F0 */ void ftKb_PkSpecialAirN_Coll(Fighter_GObj* gobj);
 /* 0FA588 */ void ftKb_SpecialNKp_800FA588(Fighter_GObj* gobj);
 /* 0FA7D4 */ void ftKb_SpecialNKp_800FA7D4(Fighter_GObj* gobj);
-/* 0FA83C */ void ftKb_SpecialNKp_800FA83C(Fighter_GObj* gobj);
-/* 0FA878 */ void ftKb_SpecialNKp_800FA878(Fighter_GObj* gobj);
+/* 0FA83C */ s32 ftKb_SpecialNKp_800FA83C(Fighter_GObj* gobj);
+/* 0FA878 */ s32 ftKb_SpecialNKp_800FA878(Fighter_GObj* gobj);
 /* 0FA8B4 */ void ftKb_SpecialNKp_800FA8B4(Fighter_GObj* gobj);
 /* 0FA958 */ void ftKb_SpecialNKp_800FA958(Fighter_GObj* gobj);
 /* 0FA9FC */ void ftKb_KpSpecialNStart_Anim(Fighter_GObj* gobj);
@@ -471,7 +600,7 @@ void fn_8010B1F4(HSD_GObj* gobj);
 /* 0FB5F4 */ void ftKb_SpecialNLk800FB5F4(Fighter_GObj* gobj);
 /* 0FB6DC */ void ftKb_SpecialNLk800FB6DC(Fighter_GObj* gobj);
 /* 0FB800 */ void ftKb_SpecialNLk800FB800(Fighter_GObj* gobj);
-/* 0FB840 */ void ftKb_SpecialNLk800FB840(Fighter_GObj* gobj);
+/* 0FB840 */ void ftKb_SpecialNLk800FB840(Fighter_GObj* gobj) ;
 /* 0FB880 */ void ftKb_SpecialNLk800FB880(Fighter_GObj* gobj);
 /* 0FBA00 */ void ftKb_SpecialNLk800FBA00(Fighter_GObj* gobj);
 /* 0FBBC4 */ void ftKb_LkSpecialNStart_Anim(Fighter_GObj* gobj);
@@ -641,7 +770,7 @@ void fn_8010B1F4(HSD_GObj* gobj);
 /* 100E0C */ /// #fn_80100E0C
 /* 100F60 */ void fn_80100F60(Fighter_GObj* gobj);
 /* 100F94 */ void ftKb_SpecialNPr_80100F94(Fighter_GObj* gobj);
-/* 1010D4 */ void ftKb_SpecialNPr_801010D4(Fighter_GObj* gobj);
+/* 1010D4 */ void ftKb_SpecialNPr_801010D4(Fighter_GObj* gobj, s32 arg1, f32 arg2, u32 arg3);
 /* 10131C */ void ftKb_SpecialNPr_8010131C(Fighter_GObj* gobj);
 /* 10140C */ void ftKb_SpecialNPr_8010140C(Fighter_GObj* gobj);
 /* 101560 */ void ftKb_SpecialNPr_80101560(Fighter_GObj* gobj);
